@@ -1,0 +1,19 @@
+#Super user permissions reqiured to execute this build
+sudo: reqiured
+language: generic
+#Tell TravisCI that we nee docker cli installed
+services:
+  - docker
+
+#Will execute a series of commands before our build is ran
+before_install:
+  - docker build -t dev/react -f Dockerfile.dev .
+
+#https://facebook.github.io/create-react-app/docs/running-tests#linux-macos-bash
+#CI=true - will force to run in CI-mode, and test will only run once instead of watcher.
+#--watchAll=false - for non-CI enviroments to disable test watching
+script:
+  - docker run -e CI=true dev/react npm run test
+
+#https://docs.docker.com/engine/reference/run/#env-environment-variables
+#Enviromental variables
