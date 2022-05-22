@@ -1,0 +1,33 @@
+version: '3'
+services:
+  react-app:
+    #will specify the name:version when image is built
+    image: react:v1
+    build:
+      #Where we want all the files and folder for this image to be pulled from
+      context: .
+      #context: dockerfilefolder
+
+      #Specify the name of the dockerfile
+      dockerfile: Dockerfile.dev
+
+
+    ports:
+      - "2000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+
+  #Adding a second service to run a test on our app
+  test-react-app:
+    image: react_test:v1
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+
+    volumes:
+      - /app/node_modules
+      - .:/app
+
+    #Specify command to run on container
+    command: ["npm", "run", "test"]

@@ -1,0 +1,19 @@
+docker build -t tara/react:v1 -f Dockerfile.dev .
+
+docker run -p 2000:3000 tara/react:v1
+
+docker run -p 2000:3000 -v /app/node_modules -v $(pwd):/app tara/react:v1
+
+docker-compose up
+
+
+docker ps
+CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                    NAMES
+2d071c8c864f   frontendv2_react-app   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   0.0.0.0:2000->3000/tcp   frontendv2-react-app-1
+docker exec -it 2d071c8c864f npm run test
+
+#Build a new multi-steps container. NGINX engine based on npm run build of the react app
+docker build -t tara/nginx:v1 .
+
+#port 80 is default port fro nginx
+docker run -p 8080:80 5284d8ee5fb4
