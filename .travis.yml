@@ -36,5 +36,5 @@ deploy:
     branch: master
 
   #Recall API keys as enviromental variables from TravisCI
-  access_key_id: $AWS_ACCESS_KEYS
-  secret_access_key: $AWS_SECRET_KEYS
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
