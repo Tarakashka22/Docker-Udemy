@@ -17,3 +17,25 @@ script:
 
 #https://docs.docker.com/engine/reference/run/#env-environment-variables
 #Enviromental variables
+
+#Tell TravisCI how to take configurations and deploy to AWS
+deploy:
+  #Use this set of instruction to deploy the app
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  #Same as Application name created on AWS
+  app: "docker-react"
+  #Same as Enviroment name created on AWS. Spesific to each app
+  env: "Dockerreaact-env"
+  #S3 bucket on AWS
+  bucket_name: "elasticbeanstalk-us-west-2-837903213847"
+  #Path to the app in S3 bucket. Not created by default. would be the same as the app name
+  bucket_path: "docker-react"
+  #To deploy new app version only if there were changes to master (prod) version
+  on:
+    branch: master
+
+  #Recall API keys as enviromental variables from TravisCI
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
