@@ -2,3 +2,12 @@
 docker-compose -f docker-compose-dev.yml up
 docker-compose -f docker-compose-dev.yml up --build
 docker-compose -f docker-compose-dev.yml down
+
+
+git status
+
+git add .
+
+git commit -m "Added AWS instructions for TravisCI"
+
+git push origin master
